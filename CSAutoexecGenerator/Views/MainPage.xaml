@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CSAutoexecGenerator.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:CSAutoexecGenerator.Components">
+
+    <VerticalStackLayout Padding="30,0" Spacing="25">
+
+        <Label
+            FontSize="32"
+            SemanticProperties.HeadingLevel="Level1"
+            Text="Autoexec Generator" />
+
+        <Label
+            FontSize="24"
+            SemanticProperties.HeadingLevel="Level2"
+            Text="Radar" />
+
+        <components:SliderSetting
+            Title="cl_hud_radar_scale"
+            Maximum="1.3"
+            Minimum="0.8" />
+
+        <Button
+            x:Name="CounterBtn"
+            Clicked="OnCounterClicked"
+            HorizontalOptions="Start"
+            SemanticProperties.Hint="Counts the number of times you click"
+            Text="Submit" />
+
+    </VerticalStackLayout>
+
+</ContentPage>
