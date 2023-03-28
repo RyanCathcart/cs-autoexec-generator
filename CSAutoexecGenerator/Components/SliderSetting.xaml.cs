@@ -14,6 +14,18 @@ public partial class SliderSetting : ContentView
 	}
 
 
+    public static readonly BindableProperty DescriptionProperty = BindableProperty.Create(
+        nameof(Description), typeof(string), typeof(SliderSetting),
+        propertyChanged: (bindable, oldValue, newValue) =>
+            ((SliderSetting)bindable).DescriptionLabel.Text = (string)newValue);
+
+    public string Description
+    {
+        get => (string)GetValue(DescriptionProperty);
+        set => SetValue(DescriptionProperty, value);
+    }
+
+
     public static readonly BindableProperty MaximumProperty = BindableProperty.Create(
         nameof(Maximum), typeof(double), typeof(SliderSetting),
         propertyChanged: (bindable, oldValue, newValue) =>
@@ -22,6 +34,7 @@ public partial class SliderSetting : ContentView
             control.SettingSlider.Maximum = (double)newValue;
             control.MaxLabel.Text = ((double)newValue).ToString();
         });
+
 
     public double Maximum
     {

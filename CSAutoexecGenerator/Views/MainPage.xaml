@@ -19,9 +19,15 @@
 
         <components:SliderSetting
             Title="cl_hud_radar_scale"
-            Value="1.0"
+            Description="Placeholder description"
             Maximum="1.3"
-            Minimum="0.8" />
+            Minimum="0.8"
+            Value="1.0" />
+
+        <components:SwitchSetting
+            Title="cl_radar_always_centered"
+            Description="Placeholder description"
+            Value="True" />
 
         <Button
             x:Name="CounterBtn"

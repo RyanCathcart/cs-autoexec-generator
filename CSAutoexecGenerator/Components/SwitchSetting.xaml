@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="CSAutoexecGenerator.Components.SwitchSetting"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <VerticalStackLayout Spacing="10">
+
+        <Label
+            x:Name="TitleLabel"
+            FontSize="18"
+            VerticalOptions="Center" />
+
+        <Label
+            x:Name="DescriptionLabel"
+            FontSize="12"
+            TextColor="Gray"
+            VerticalOptions="Center" />
+
+        <Switch x:Name="SettingSwitch" Toggled="OnSwitchToggled" />
+
+    </VerticalStackLayout>
+</ContentView>
