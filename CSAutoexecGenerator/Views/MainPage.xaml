@@ -19,6 +19,7 @@
 
         <components:SliderSetting
             Title="cl_hud_radar_scale"
+            Value="1.0"
             Maximum="1.3"
             Minimum="0.8" />
 

@@ -2,7 +2,7 @@ namespace CSAutoexecGenerator.Components;
 
 public partial class SliderSetting : ContentView
 {
-	public static readonly BindableProperty TitleProperty = BindableProperty.Create(
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(
 		nameof(Title), typeof(string), typeof(SliderSetting), 
 		propertyChanged: (bindable, oldValue, newValue) => 
             ((SliderSetting)bindable).TitleLabel.Text = (string)newValue);
@@ -17,7 +17,11 @@ public partial class SliderSetting : ContentView
     public static readonly BindableProperty MaximumProperty = BindableProperty.Create(
         nameof(Maximum), typeof(double), typeof(SliderSetting),
         propertyChanged: (bindable, oldValue, newValue) =>
-            ((SliderSetting)bindable).SettingSlider.Maximum = (double)newValue);
+        {
+            var control = (SliderSetting)bindable;
+            control.SettingSlider.Maximum = (double)newValue;
+            control.MaxLabel.Text = ((double)newValue).ToString();
+        });
 
     public double Maximum
     {
@@ -29,12 +33,32 @@ public partial class SliderSetting : ContentView
     public static readonly BindableProperty MinimumProperty = BindableProperty.Create(
         nameof(Minimum), typeof(double), typeof(SliderSetting),
         propertyChanged: (bindable, oldValue, newValue) =>
-            ((SliderSetting)bindable).SettingSlider.Minimum = (double)newValue);
+        {
+            var control = (SliderSetting)bindable;
+            control.SettingSlider.Minimum = (double)newValue;
+            control.MinLabel.Text = ((double)newValue).ToString();
+        });
 
     public double Minimum
     {
         get => (double)GetValue(MinimumProperty);
         set => SetValue(MinimumProperty, value);
+    }
+
+
+    public static readonly BindableProperty ValueProperty = BindableProperty.Create(
+        nameof(Value), typeof(double), typeof(SliderSetting),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var control = (SliderSetting)bindable;
+            control.SettingSlider.Value = (double)newValue;
+            control.SliderValueEntry.Text = ((double)newValue).ToString("F2");
+        });
+
+    public double Value
+    {
+        get => (double)GetValue(ValueProperty);
+        set => SetValue(ValueProperty, value);
     }
 
 
@@ -45,8 +69,8 @@ public partial class SliderSetting : ContentView
 
     void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
     {
-        double value = args.NewValue;
-        SliderValueEntry.Text = value.ToString("F2");
+        double newValue = args.NewValue;
+        Value = newValue;
     }
 
     void OnEntryCompleted(object sender, EventArgs args)
@@ -58,7 +82,6 @@ public partial class SliderSetting : ContentView
         if (newValue < Minimum) newValue = Minimum;
         else if (newValue > Maximum) newValue = Maximum;
 
-        ((Entry)sender).Text = newValue.ToString("F2");
-        SettingSlider.Value = newValue; 
+        Value = newValue;
     }
 }
