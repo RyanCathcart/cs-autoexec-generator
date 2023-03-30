@@ -1,24 +1,27 @@
-﻿namespace CSAutoexecGenerator.Views;
+﻿using CSAutoexecGenerator.ViewModels;
+
+namespace CSAutoexecGenerator.Views;
 
 public partial class MainPage : ContentPage
 {
 	int _count = 0;
 
-	public MainPage()
+	public MainPage(MainViewModel mainViewModel	)
 	{
 		InitializeComponent();
+		BindingContext = mainViewModel;
 	}
 
-    private void OnCounterClicked(object sender, EventArgs e)
+    private void OnCreateClicked(object sender, EventArgs e)
 	{
 		_count++;
 
 		if (_count == 1)
-			CounterBtn.Text = $"Clicked {_count} time";
+            CreateButton.Text = $"Clicked {_count} time";
 		else
-			CounterBtn.Text = $"Clicked {_count} times";
+            CreateButton.Text = $"Clicked {_count} times";
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
+		SemanticScreenReader.Announce(CreateButton.Text);
 	}
 }
 

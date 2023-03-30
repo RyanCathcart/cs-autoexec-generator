@@ -2,18 +2,18 @@
 <ContentView
     x:Class="CSAutoexecGenerator.Components.SliderSetting"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
 
-    <VerticalStackLayout Spacing="10">
+    <VerticalStackLayout BindingContext="{x:Reference this}" Spacing="10">
 
         <Label
-            x:Name="TitleLabel"
-            FontSize="18"
+            FontSize="Title"
+            Text="{Binding Title}"
             VerticalOptions="Center" />
 
         <Label
-            x:Name="DescriptionLabel"
-            FontSize="12"
+            Text="{Binding Description}"
             TextColor="Gray"
             VerticalOptions="Center" />
 
@@ -32,22 +32,27 @@
                 <Slider
                     x:Name="SettingSlider"
                     Grid.ColumnSpan="2"
+                    Maximum="{Binding Maximum}"
+                    Minimum="{Binding Minimum}"
                     ValueChanged="OnSliderValueChanged"
                     VerticalOptions="Center"
                     WidthRequest="400" />
 
-                <Label x:Name="MinLabel" Grid.Row="1" />
+                <Label Grid.Row="1" Text="{Binding Minimum}" />
+
                 <Label
-                    x:Name="MaxLabel"
                     Grid.Row="1"
                     Grid.Column="1"
-                    HorizontalTextAlignment="End" />
+                    HorizontalTextAlignment="End"
+                    Text="{Binding Maximum}" />
             </Grid>
 
             <Entry
                 x:Name="SliderValueEntry"
                 Completed="OnEntryCompleted"
-                MaxLength="4" />
+                FontSize="Micro"
+                MaxLength="4"
+                VerticalOptions="Center" />
 
         </HorizontalStackLayout>
     </VerticalStackLayout>

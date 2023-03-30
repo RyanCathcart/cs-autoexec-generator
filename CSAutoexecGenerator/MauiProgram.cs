@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CSAutoexecGenerator.Services;
+using CSAutoexecGenerator.ViewModels;
+using CSAutoexecGenerator.Views;
+using Microsoft.Extensions.Logging;
 
 namespace CSAutoexecGenerator;
 
@@ -19,6 +22,10 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+        builder.Services.AddTransient<MainPage>();
+        builder.Services.AddSingleton<ConfigService>();
+        builder.Services.AddTransient<MainViewModel>();
+
+        return builder.Build();
 	}
 }

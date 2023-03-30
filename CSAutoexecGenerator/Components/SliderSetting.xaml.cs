@@ -2,10 +2,14 @@ namespace CSAutoexecGenerator.Components;
 
 public partial class SliderSetting : ContentView
 {
+    public SliderSetting()
+    {
+        InitializeComponent();
+    }
+
+    // Title Property and BindableProperty definitions
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(
-		nameof(Title), typeof(string), typeof(SliderSetting), 
-		propertyChanged: (bindable, oldValue, newValue) => 
-            ((SliderSetting)bindable).TitleLabel.Text = (string)newValue);
+        nameof(Title), typeof(string), typeof(SliderSetting), "Default Title");
 
 	public string Title 
 	{
@@ -14,10 +18,9 @@ public partial class SliderSetting : ContentView
 	}
 
 
+    // Description Property and BindableProperty definitions
     public static readonly BindableProperty DescriptionProperty = BindableProperty.Create(
-        nameof(Description), typeof(string), typeof(SliderSetting),
-        propertyChanged: (bindable, oldValue, newValue) =>
-            ((SliderSetting)bindable).DescriptionLabel.Text = (string)newValue);
+        nameof(Description), typeof(string), typeof(SliderSetting), "Default description.");
 
     public string Description
     {
@@ -26,14 +29,9 @@ public partial class SliderSetting : ContentView
     }
 
 
+    // Maximum Property and BindableProperty definitions
     public static readonly BindableProperty MaximumProperty = BindableProperty.Create(
-        nameof(Maximum), typeof(double), typeof(SliderSetting),
-        propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var control = (SliderSetting)bindable;
-            control.SettingSlider.Maximum = (double)newValue;
-            control.MaxLabel.Text = ((double)newValue).ToString();
-        });
+        nameof(Maximum), typeof(double), typeof(SliderSetting), 1.0);
 
 
     public double Maximum
@@ -43,14 +41,9 @@ public partial class SliderSetting : ContentView
     }
 
 
+    // Minimum Property and BindableProperty definitions
     public static readonly BindableProperty MinimumProperty = BindableProperty.Create(
-        nameof(Minimum), typeof(double), typeof(SliderSetting),
-        propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var control = (SliderSetting)bindable;
-            control.SettingSlider.Minimum = (double)newValue;
-            control.MinLabel.Text = ((double)newValue).ToString();
-        });
+        nameof(Minimum), typeof(double), typeof(SliderSetting), 0.0);
 
     public double Minimum
     {
@@ -59,14 +52,17 @@ public partial class SliderSetting : ContentView
     }
 
 
+    // Value Property and BindableProperty definitions
     public static readonly BindableProperty ValueProperty = BindableProperty.Create(
         nameof(Value), typeof(double), typeof(SliderSetting),
-        propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var control = (SliderSetting)bindable;
-            control.SettingSlider.Value = (double)newValue;
-            control.SliderValueEntry.Text = ((double)newValue).ToString("F2");
-        });
+        propertyChanged: OnValuePropertyChanged);
+
+    static void OnValuePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (SliderSetting)bindable;
+        control.SettingSlider.Value = (double)newValue;
+        control.SliderValueEntry.Text = ((double)newValue).ToString("F2");
+    }
 
     public double Value
     {
@@ -75,18 +71,14 @@ public partial class SliderSetting : ContentView
     }
 
 
-    public SliderSetting()
-	{
-		InitializeComponent();
-	}
-
-    void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
+    void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
     {
-        double newValue = args.NewValue;
-        Value = newValue;
+        if (e.NewValue == e.OldValue) return;
+
+        Value = e.NewValue;
     }
 
-    void OnEntryCompleted(object sender, EventArgs args)
+    void OnEntryCompleted(object sender, EventArgs e)
     {
         string enteredValue = ((Entry)sender).Text;
 

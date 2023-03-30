@@ -3,38 +3,54 @@
     x:Class="CSAutoexecGenerator.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:components="clr-namespace:CSAutoexecGenerator.Components">
+    xmlns:components="clr-namespace:CSAutoexecGenerator.Components"
+    xmlns:models="clr-namespace:CSAutoexecGenerator.Models"
+    xmlns:viewmodels="clr-namespace:CSAutoexecGenerator.ViewModels"
+    x:DataType="viewmodels:MainViewModel">
 
     <VerticalStackLayout Padding="30,0" Spacing="25">
 
         <Label
-            FontSize="32"
+            FontSize="Header"
             SemanticProperties.HeadingLevel="Level1"
             Text="Autoexec Generator" />
 
         <Label
-            FontSize="24"
+            FontSize="Large"
             SemanticProperties.HeadingLevel="Level2"
             Text="Radar" />
 
+        <CollectionView ItemsSource="{Binding Settings}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="Set" />
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
         <components:SliderSetting
             Title="cl_hud_radar_scale"
-            Description="Placeholder description"
+            Description="Sets the size of the radar."
             Maximum="1.3"
             Minimum="0.8"
             Value="1.0" />
 
         <components:SwitchSetting
             Title="cl_radar_always_centered"
-            Description="Placeholder description"
+            Description="Sets whether the radar is centered on the player or not."
             Value="True" />
 
+        <components:SliderSetting
+            Title="cl_radar_scale"
+            Description="Sets the scale of the map in the radar."
+            Maximum="1"
+            Minimum="0.25"
+            Value="0.7" />
+
         <Button
-            x:Name="CounterBtn"
-            Clicked="OnCounterClicked"
+            x:Name="CreateButton"
+            Clicked="OnCreateClicked"
             HorizontalOptions="Start"
-            SemanticProperties.Hint="Counts the number of times you click"
-            Text="Submit" />
+            SemanticProperties.Hint="Generates an autoexec.cfg file using the settings above"
+            Text="Create" />
 
     </VerticalStackLayout>
 

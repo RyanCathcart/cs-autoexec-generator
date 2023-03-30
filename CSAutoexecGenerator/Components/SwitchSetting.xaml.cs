@@ -2,10 +2,14 @@ namespace CSAutoexecGenerator.Components;
 
 public partial class SwitchSetting : ContentView
 {
+    public SwitchSetting()
+    {
+        InitializeComponent();
+    }
+
+    // Title Property and BindableProperty definitions
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(
-        nameof(Title), typeof(string), typeof(SwitchSetting),
-        propertyChanged: (bindable, oldValue, newValue) =>
-            ((SwitchSetting)bindable).TitleLabel.Text = (string)newValue);
+        nameof(Title), typeof(string), typeof(SwitchSetting), "Default Title");
 
     public string Title
     {
@@ -14,10 +18,9 @@ public partial class SwitchSetting : ContentView
     }
 
 
+    // Description Property and BindableProperty definitions
     public static readonly BindableProperty DescriptionProperty = BindableProperty.Create(
-        nameof(Description), typeof(string), typeof(SwitchSetting),
-        propertyChanged: (bindable, oldValue, newValue) =>
-            ((SwitchSetting)bindable).DescriptionLabel.Text = (string)newValue);
+        nameof(Description), typeof(string), typeof(SwitchSetting), "Default description.");
 
     public string Description
     {
@@ -26,13 +29,16 @@ public partial class SwitchSetting : ContentView
     }
 
 
+    // Value Property and BindableProperty definitions
     public static readonly BindableProperty ValueProperty = BindableProperty.Create(
         nameof(Value), typeof(bool), typeof(SwitchSetting),
-        propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            var control = (SwitchSetting)bindable;
-            control.SettingSwitch.IsToggled = (bool)newValue;
-        });
+        propertyChanged: OnValuePropertyChanged);
+
+    static void OnValuePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (SwitchSetting)bindable;
+        control.SettingSwitch.IsToggled = (bool)newValue;
+    }
 
     public bool Value
     {
@@ -40,11 +46,6 @@ public partial class SwitchSetting : ContentView
         set => SetValue(ValueProperty, value);
     }
 
-
-    public SwitchSetting()
-	{
-		InitializeComponent();
-	}
 
     void OnSwitchToggled(object sender, ToggledEventArgs args)
     {
