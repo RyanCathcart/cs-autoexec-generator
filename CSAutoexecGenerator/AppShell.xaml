@@ -10,7 +10,13 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage"
+        Route="HomePage"
         Shell.NavBarIsVisible="False" />
+
+    <ShellContent
+        Title="Create Config"
+        ContentTemplate="{DataTemplate views:CreateConfigPage}"
+        Route="CreateConfigPage"
+        Shell.NavBarIsVisible="True" />
 
 </Shell>

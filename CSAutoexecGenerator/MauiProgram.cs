@@ -1,4 +1,6 @@
-﻿using CSAutoexecGenerator.Services;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Storage;
+using CSAutoexecGenerator.Services;
 using CSAutoexecGenerator.ViewModels;
 using CSAutoexecGenerator.Views;
 using Microsoft.Extensions.Logging;
@@ -12,7 +14,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
@@ -22,9 +25,12 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddTransient<MainPage>();
+		builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<CreateConfigPage>();
+        builder.Services.AddSingleton<CreateConfigViewModel>();
+
         builder.Services.AddSingleton<ConfigService>();
-        builder.Services.AddTransient<MainViewModel>();
+		builder.Services.AddSingleton(FolderPicker.Default);
 
         return builder.Build();
 	}

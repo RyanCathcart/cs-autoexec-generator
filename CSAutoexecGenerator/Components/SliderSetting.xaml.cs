@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.Input;
+
 namespace CSAutoexecGenerator.Components;
 
 public partial class SliderSetting : ContentView
@@ -54,14 +56,19 @@ public partial class SliderSetting : ContentView
 
     // Value Property and BindableProperty definitions
     public static readonly BindableProperty ValueProperty = BindableProperty.Create(
-        nameof(Value), typeof(double), typeof(SliderSetting),
-        propertyChanged: OnValuePropertyChanged);
+        nameof(Value), typeof(double), typeof(SliderSetting), propertyChanged: OnValueChanged);
 
-    static void OnValuePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    private static void OnValueChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (SliderSetting)bindable;
-        control.SettingSlider.Value = (double)newValue;
-        control.SliderValueEntry.Text = ((double)newValue).ToString("F2");
+
+        double value = (double)newValue;
+
+        if (value < control.Minimum) value = control.Minimum;
+        else if (value > control.Maximum) value = control.Maximum;
+
+        control.Slider.Value = value;
+        control.Entry.Text = value.ToString("F");
     }
 
     public double Value
@@ -70,23 +77,27 @@ public partial class SliderSetting : ContentView
         set => SetValue(ValueProperty, value);
     }
 
-
-    void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
-    {
-        if (e.NewValue == e.OldValue) return;
-
-        Value = e.NewValue;
-    }
-
     void OnEntryCompleted(object sender, EventArgs e)
     {
-        string enteredValue = ((Entry)sender).Text;
+        var control = (Entry)sender;
 
-        if (!double.TryParse(enteredValue, out double newValue)) return;
-        
+        if (double.TryParse(control.Text, out double newValue) == false)
+        {
+            control.Text = Value.ToString("F");
+            return;
+        }
+
         if (newValue < Minimum) newValue = Minimum;
         else if (newValue > Maximum) newValue = Maximum;
 
+        control.Text = newValue.ToString("F");
+
         Value = newValue;
+    }
+
+    [RelayCommand]
+    void OnSliderDragCompleted()
+    {
+        Value = Math.Round(Value, 2);
     }
 }

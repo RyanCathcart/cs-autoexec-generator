@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Name="this">
 
-    <VerticalStackLayout BindingContext="{x:Reference this}" Spacing="10">
+    <VerticalStackLayout
+        Padding="14,20"
+        BindingContext="{x:Reference this}"
+        Spacing="10">
 
         <Label
             FontSize="Title"
@@ -30,13 +33,14 @@
                 </Grid.ColumnDefinitions>
 
                 <Slider
-                    x:Name="SettingSlider"
+                    x:Name="Slider"
                     Grid.ColumnSpan="2"
+                    DragCompletedCommand="{Binding SliderDragCompletedCommand}"
                     Maximum="{Binding Maximum}"
                     Minimum="{Binding Minimum}"
-                    ValueChanged="OnSliderValueChanged"
                     VerticalOptions="Center"
-                    WidthRequest="400" />
+                    WidthRequest="400"
+                    Value="{Binding Value}" />
 
                 <Label Grid.Row="1" Text="{Binding Minimum}" />
 
@@ -48,10 +52,11 @@
             </Grid>
 
             <Entry
-                x:Name="SliderValueEntry"
+                x:Name="Entry"
                 Completed="OnEntryCompleted"
                 FontSize="Micro"
-                MaxLength="4"
+                MinimumHeightRequest="40"
+                Unfocused="OnEntryCompleted"
                 VerticalOptions="Center" />
 
         </HorizontalStackLayout>

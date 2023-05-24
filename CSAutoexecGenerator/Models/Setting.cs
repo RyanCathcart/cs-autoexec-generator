@@ -1,8 +1,11 @@
-﻿namespace CSAutoexecGenerator.Models;
+﻿using System.Text.Json.Serialization;
 
-public class Setting
+namespace CSAutoexecGenerator.Models;
+
+[JsonDerivedType(typeof(DoubleSetting), typeDiscriminator: "double")]
+[JsonDerivedType(typeof(BooleanSetting), typeDiscriminator: "boolean")]
+public abstract class Setting
 {
     public string Name { get; set; }
-
-    public double Value { get; set; }
+    public string Description { get; set; }
 }

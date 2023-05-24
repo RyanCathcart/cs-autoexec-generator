@@ -1,57 +1,61 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="CSAutoexecGenerator.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:components="clr-namespace:CSAutoexecGenerator.Components"
-    xmlns:models="clr-namespace:CSAutoexecGenerator.Models"
-    xmlns:viewmodels="clr-namespace:CSAutoexecGenerator.ViewModels"
-    x:DataType="viewmodels:MainViewModel">
+    Title="Welcome to Counter-Strike Autoexec Generator">
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Border
+            Padding="10"
+            MaximumWidthRequest="500"
+            Stroke="Transparent"
+            StrokeShape="RoundRectangle 10">
 
-    <VerticalStackLayout Padding="30,0" Spacing="25">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0.0" Color="{x:StaticResource Blue100Accent}" />
+                    <GradientStop Offset="1.0" Color="{x:StaticResource Tertiary}" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Label
+                FontSize="48"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Counter-Strike Autoexec Generator" />
+        </Border>
 
         <Label
-            FontSize="Header"
-            SemanticProperties.HeadingLevel="Level1"
-            Text="Autoexec Generator" />
+            FontSize="Small"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Text="This tool helps you set your config for Counter-Strike" />
 
-        <Label
-            FontSize="Large"
-            SemanticProperties.HeadingLevel="Level2"
-            Text="Radar" />
+        <Label FontSize="Large" Text="How To Use:" />
+        <VerticalStackLayout Spacing="10">
+            <Label FontSize="Small" Text="- In 'Create Config', adjust the settings according to your preferences" />
+            <Label FontSize="Small" Text="    - Optional: Import an existing config file by pressing 'Import Config' in the top-right" />
 
-        <CollectionView ItemsSource="{Binding Settings}" SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="Set" />
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <Label FontSize="Small" LineBreakMode="WordWrap">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="- Set the save destination for your autoexec.cfg to your " />
+                        <Span FontAttributes="Italic" Text="Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg " />
+                        <Span Text="folder " />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <components:SliderSetting
-            Title="cl_hud_radar_scale"
-            Description="Sets the size of the radar."
-            Maximum="1.3"
-            Minimum="0.8"
-            Value="1.0" />
+            <Label FontSize="Small" Text="- Save your config by pressing 'Create'" />
+            <Label FontSize="Small" Text="- Either:" />
+            <Label FontSize="Small" Text="    - Add your config to your game's launch options:" />
+            <Label FontSize="Small" Text="        - Go to your library in the Steam app" />
+            <Label FontSize="Small" Text="        - Right-click Counter-Strike and click 'Properties...'" />
+            <Label FontSize="Small" Text="        - In 'General', add '+exec autoexec' to the 'Launch Properties' text field" />
+            <Label FontSize="Small" Text="        - Your config will be set every time the game starts" />
+            <Label FontSize="Small" Text="    - Or, open the console in-game (press ~ by default), and run the command 'exec autoexec'" />
 
-        <components:SwitchSetting
-            Title="cl_radar_always_centered"
-            Description="Sets whether the radar is centered on the player or not."
-            Value="True" />
-
-        <components:SliderSetting
-            Title="cl_radar_scale"
-            Description="Sets the scale of the map in the radar."
-            Maximum="1"
-            Minimum="0.25"
-            Value="0.7" />
-
-        <Button
-            x:Name="CreateButton"
-            Clicked="OnCreateClicked"
-            HorizontalOptions="Start"
-            SemanticProperties.Hint="Generates an autoexec.cfg file using the settings above"
-            Text="Create" />
+        </VerticalStackLayout>
 
     </VerticalStackLayout>
-
 </ContentPage>

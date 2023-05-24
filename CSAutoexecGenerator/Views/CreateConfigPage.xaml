@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CSAutoexecGenerator.Views.CreateConfigPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:CSAutoexecGenerator.Components"
+    xmlns:models="clr-namespace:CSAutoexecGenerator.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:CSAutoexecGenerator.ViewModels"
+    x:DataType="viewmodels:CreateConfigViewModel">
+
+    <Shell.TitleView>
+        <Grid
+            Padding="14,0"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="48">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Small"
+                Text="{Binding Title}"
+                VerticalOptions="Center" />
+
+            <Button
+                Grid.Column="1"
+                Command="{Binding GetConfigCommand}"
+                FontSize="18"
+                Scale="0.8"
+                Text="Import Config"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding GetDefaultConfigCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="Header" x:DataType="models:SettingGroup">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Text="{Binding Name}"
+                    TextColor="{x:StaticResource Blue100Accent}" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="DoubleValue" x:DataType="models:DoubleSetting">
+                <components:SliderSetting
+                    Title="{Binding Name}"
+                    Description="{Binding Description}"
+                    Maximum="{Binding Maximum}"
+                    Minimum="{Binding Minimum}"
+                    Value="{Binding Value, Mode=TwoWay}" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="BooleanValue" x:DataType="models:BooleanSetting">
+                <components:SwitchSetting
+                    Title="{Binding Name}"
+                    Description="{Binding Description}"
+                    Value="{Binding Value, Mode=TwoWay}" />
+            </DataTemplate>
+
+            <components:SettingDataTemplateSelector
+                x:Key="SettingSelector"
+                BooleanValueTemplate="{StaticResource BooleanValue}"
+                DoubleValueTemplate="{StaticResource DoubleValue}" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid ColumnDefinitions="*, Auto" RowDefinitions="*, 48">
+
+        <CollectionView
+            Grid.ColumnSpan="2"
+            GroupHeaderTemplate="{StaticResource Header}"
+            IsGrouped="True"
+            ItemTemplate="{StaticResource SettingSelector}"
+            ItemsSource="{Binding Settings}"
+            SelectionMode="None" />
+
+        <HorizontalStackLayout
+            Grid.Row="1"
+            Padding="10"
+            BackgroundColor="{StaticResource Gray950}"
+            Spacing="20">
+
+            <HorizontalStackLayout Spacing="4">
+                <Label Text="Save Destination:" VerticalOptions="Center" />
+
+                <Label Text="{Binding SaveDestination, StringFormat='{0}\\'}" VerticalOptions="Center" />
+
+                <Entry
+                    HeightRequest="30"
+                    MinimumHeightRequest="30"
+                    Text="{Binding SaveFileName}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding FileNameEntryCompletedCommand}" EventName="Unfocused" />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label
+                    FontAttributes="Italic"
+                    Text=".cfg"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label
+                FontAttributes="Bold"
+                Text="Change"
+                TextColor="{StaticResource Blue200Accent}"
+                TextDecorations="Underline"
+                VerticalOptions="Center">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpdateSaveDestinationCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout
+            Grid.Row="1"
+            Grid.Column="1"
+            Padding="14,2"
+            BackgroundColor="{StaticResource Gray950}"
+            Spacing="10">
+
+            <Button
+                x:Name="CreateButton"
+                Padding="36,0"
+                Command="{Binding CreateConfigCommand}"
+                FontSize="18"
+                IsEnabled="{Binding IsNotBusy}"
+                Scale="0.8"
+                Text="Create"
+                TextColor="Black" />
+
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

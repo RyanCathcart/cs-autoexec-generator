@@ -1,0 +1,188 @@
+[
+  {
+    "Name": "Game",
+    "Settings": [
+      {
+        "$type": "boolean",
+        "Name": "gameinstructor_enable",
+        "Description": "Enables or disables the instructions and tips that pop up while in-game.",
+        "Value": true
+      },
+      {
+        "$type": "boolean",
+        "Name": "net_graph",
+        "Description": "Enables or disables the net graph display, which shows ping, FPS, and other client variables.",
+        "Value": false
+      },
+      {
+        "$type": "boolean",
+        "Name": "net_graphproportionalfont",
+        "Description": "Sets whether or not net graph font should be made proportional to the game resolution.",
+        "Value": true
+      },
+      {
+        "$type": "boolean",
+        "Name": "cl_autowepswitch",
+        "Description": "Sets whether or not weapons are automatically equipped when picked up.",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Name": "Audio",
+    "Settings": [
+      {
+        "$type": "double",
+        "Name": "volume",
+        "Description": "Sets the master volume of the game.",
+        "Minimum": 0,
+        "Maximum": 1,
+        "Value": 1
+      },
+      {
+        "$type": "double",
+        "Name": "snd_menumusic_volume",
+        "Description": "Sets the volume of music when in the main menu.",
+        "Minimum": 0,
+        "Maximum": 0.6,
+        "Value": 0.6
+      },
+      {
+        "$type": "double",
+        "Name": "snd_roundstart_volume",
+        "Description": "Sets the volume of music played at the start of every round.",
+        "Minimum": 0,
+        "Maximum": 0.6,
+        "Value": 0.6
+      },
+      {
+        "$type": "double",
+        "Name": "snd_roundend_volume",
+        "Description": "Sets the volume of music played at the end of every round.",
+        "Minimum": 0,
+        "Maximum": 0.6,
+        "Value": 0.6
+      },
+      {
+        "$type": "double",
+        "Name": "snd_mapobjective_volume",
+        "Description": "Sets the volume of music played when there is ten seconds left on the bomb timer.",
+        "Minimum": 0,
+        "Maximum": 0.6,
+        "Value": 0.6
+      },
+      {
+        "$type": "double",
+        "Name": "snd_tensecondwarning_volume",
+        "Description": "Sets the volume of music played when there is ten seconds left on the bomb timer.",
+        "Minimum": 0,
+        "Maximum": 0.6,
+        "Value": 0.6
+      },
+      {
+        "$type": "double",
+        "Name": "snd_deathcamera_volume",
+        "Description": "Sets the volume of sound effect played at the start of the death screen.",
+        "Minimum": 0,
+        "Maximum": 0.6,
+        "Value": 0.6
+      },
+      {
+        "$type": "double",
+        "Name": "snd_mvp_volume",
+        "Description": "Sets the volume of MVP audio.",
+        "Minimum": 0,
+        "Maximum": 0.6,
+        "Value": 0.6
+      },
+      {
+        "$type": "boolean",
+        "Name": "voice_enable",
+        "Description": "Sets whether in-game voice communication is on or off",
+        "Value": true
+      },
+      {
+        "$type": "double",
+        "Name": "voice_scale",
+        "Description": "Sets the volume of voice communication (VOIP).",
+        "Minimum": 0,
+        "Maximum": 1,
+        "Value": 1
+      }
+    ]
+  },
+  {
+    "Name": "Mouse",
+    "Settings": [
+      {
+        "$type": "double",
+        "Name": "sensitivity",
+        "Description": "Sets the mouse sensitivity.",
+        "Minimum": 0.05,
+        "Maximum": 8,
+        "Value": 1
+      },
+      {
+        "$type": "double",
+        "Name": "zoom_sensitivity_ratio_mouse",
+        "Description": "Sets the mouse sensitivity when aiming down a scope, using a ratio value.",
+        "Minimum": 0.1,
+        "Maximum": 1.5,
+        "Value": 1
+      },
+      {
+        "$type": "boolean",
+        "Name": "m_rawinput",
+        "Description": "Sets whether the game uses raw input from the mouse to control aim.",
+        "Value": true
+      }
+    ]
+  },
+  {
+    "Name": "Radar",
+    "Settings": [
+      {
+        "$type": "double",
+        "Name": "cl_hud_radar_scale",
+        "Description": "Sets the size of the radar.",
+        "Minimum": 0.8,
+        "Maximum": 1.3,
+        "Value": 1
+      },
+      {
+        "$type": "boolean",
+        "Name": "cl_radar_always_centered",
+        "Description": "Sets whether the radar is centered on the player or not.",
+        "Value": true
+      },
+      {
+        "$type": "double",
+        "Name": "cl_radar_scale",
+        "Description": "Sets the scale of the map in the radar.",
+        "Minimum": 0.25,
+        "Maximum": 1,
+        "Value": 0.7
+      },
+      {
+        "$type": "boolean",
+        "Name": "cl_radar_rotate",
+        "Description": "Sets whether the radar rotates with the player.",
+        "Value": true
+      },
+      {
+        "$type": "double",
+        "Name": "cl_radar_icon_scale_min",
+        "Description": "Sets the scale of the icons in the radar.",
+        "Minimum": 0.4,
+        "Maximum": 1,
+        "Value": 0.6
+      },
+      {
+        "$type": "boolean",
+        "Name": "cl_radar_square_with_scoreboard",
+        "Description": "Sets whether the radar becomes square when the scoreboard is on screen.",
+        "Value": true
+      }
+    ]
+  }
+]

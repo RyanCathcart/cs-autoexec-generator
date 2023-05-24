@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Name="this">
 
-    <VerticalStackLayout BindingContext="{x:Reference this}" Spacing="10">
+    <VerticalStackLayout
+        Padding="14,20"
+        BindingContext="{x:Reference this}"
+        Spacing="10">
 
         <Label
             FontSize="Title"
@@ -17,7 +20,15 @@
             TextColor="Gray"
             VerticalOptions="Center" />
 
-        <Switch x:Name="SettingSwitch" Toggled="OnSwitchToggled" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <Switch
+                x:Name="SettingSwitch"
+                IsToggled="{Binding Value}" />
+        </Grid>
 
     </VerticalStackLayout>
 </ContentView>

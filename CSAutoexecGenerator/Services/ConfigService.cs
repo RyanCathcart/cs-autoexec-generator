@@ -1,34 +1,121 @@
 ﻿using CSAutoexecGenerator.Models;
+using System.Text.Json;
 
 namespace CSAutoexecGenerator.Services;
 
 public class ConfigService
 {
-    List<Setting> _settingList = new();
+    readonly List<SettingGroup> _settingList = new();
+    readonly List<string> _excludeList = new() { "//", "bind", "alias", "host_writeconfig", "echo" };
 
-    public List<Setting> GetSettings()
+    public async Task<List<SettingGroup>> LoadDefaultConfigAsync()
     {
-        var filePath = "C:\\Users\\Ryan Cathcart\\Documents\\dev\\repos\\cs-autoexec-generator\\CSAutoexecGenerator\\Resources\\Raw\\DefaultConfig.txt";
+        var fileName = "default_config.json";
 
-        using (var reader = new StreamReader(filePath))
+        using (var stream = await FileSystem.OpenAppPackageFileAsync(fileName))
+        {
+            using var reader = new StreamReader(stream);
+
+            var json = reader.ReadToEnd();
+
+            var temp = JsonSerializer.Deserialize<List<SettingGroupDto>>(json);
+
+            foreach (var settingGroup in temp)
+            {
+                _settingList.Add(new SettingGroup(settingGroup.Name, settingGroup.Settings));
+            }
+        }
+
+        return _settingList;
+    }
+
+    public static async Task ExportConfigAsync(string savePath, ICollection<SettingGroup> settings)
+    {
+        await Task.Delay(1000);
+
+        using StreamWriter outputFile = new(savePath);
+
+        foreach (var settingGroup in settings)
+        {
+            await outputFile.WriteLineAsync($"// {settingGroup.Name}");
+
+            foreach (var setting in settingGroup)
+            {
+                var command = setting.Name;
+                string value;
+
+                if (setting is DoubleSetting doubleSetting)
+                {
+                    value = doubleSetting.Value.ToString();
+                }
+                else
+                {
+                    value = ((BooleanSetting)setting).Value ? "1" : "0";
+                }
+
+                await outputFile.WriteLineAsync($"{command} \"{value}\"");
+            }
+
+            await outputFile.WriteAsync($"\n\n");
+        }
+
+        await outputFile.WriteLineAsync(
+            $"host_writeconfig\n" +
+            $"echo \"\"\n" +
+            $"echo \"\"\n" +
+            $"echo \"autoexec.cfg loaded\"\n" +
+            $"echo \"\"\n" +
+            $"echo \"\"");
+    }
+
+    public async Task<List<SettingGroup>> ImportConfigAsync(FileResult file, ICollection<SettingGroup> settings)
+    {
+        using (var fileStream = await file.OpenReadAsync())
+        using (var reader = new StreamReader(fileStream))
         {
             string line;
 
             while ((line = reader.ReadLine()) != null)
             {
-                string[] sections = line.Split(' ');
+                if (ShouldExclude(line)) continue;
 
-                var settingName = sections[0];
-                var settingValue = double.Parse(sections[1].Trim('"'));
+                string[] props = line.Split(' ');
 
-                _settingList.Add(new Setting
+                var settingName = props[0];
+                var settingValue = props[1].Trim('"');
+
+                foreach (var settingGroup in settings)
                 {
-                    Name = settingName,
-                    Value =  settingValue
-                });
+                    foreach (var setting in settingGroup)
+                    {
+                        if (setting.Name == settingName)
+                        {
+                            if (setting is DoubleSetting doubleSetting)
+                            {
+                                doubleSetting.Value = double.Parse(settingValue);
+                            }
+                            else
+                            {
+                                ((BooleanSetting)setting).Value = settingValue == "1";
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        return _settingList;
+        return new List<SettingGroup>(settings);
+    }
+
+    private bool ShouldExclude(string line)
+    {
+        if (string.IsNullOrWhiteSpace(line)) return true;
+
+        foreach(var prefix in _excludeList)
+        {
+            if (line.StartsWith(prefix)) return true;
+        }
+
+        return false;
     }
 }

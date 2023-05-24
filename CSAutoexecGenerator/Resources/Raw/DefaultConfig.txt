@@ -1,3 +1,0 @@
-﻿cl_hud_radar_scale "1"
-cl_radar_always_centered "1"
-cl_radar_scale "0.7"

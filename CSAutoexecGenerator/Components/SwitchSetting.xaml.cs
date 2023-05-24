@@ -31,24 +31,11 @@ public partial class SwitchSetting : ContentView
 
     // Value Property and BindableProperty definitions
     public static readonly BindableProperty ValueProperty = BindableProperty.Create(
-        nameof(Value), typeof(bool), typeof(SwitchSetting),
-        propertyChanged: OnValuePropertyChanged);
-
-    static void OnValuePropertyChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        var control = (SwitchSetting)bindable;
-        control.SettingSwitch.IsToggled = (bool)newValue;
-    }
+        nameof(Value), typeof(bool), typeof(SwitchSetting));
 
     public bool Value
     {
         get => (bool)GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
-    }
-
-
-    void OnSwitchToggled(object sender, ToggledEventArgs args)
-    {
-        Value = args.Value;
     }
 }
