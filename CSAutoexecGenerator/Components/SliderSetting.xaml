@@ -11,7 +11,8 @@
         Spacing="10">
 
         <Label
-            FontSize="Title"
+            FontSize="Small"
+            
             Text="{Binding Title}"
             VerticalOptions="Center" />
 

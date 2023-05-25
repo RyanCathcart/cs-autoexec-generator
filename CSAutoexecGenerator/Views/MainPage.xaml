@@ -26,17 +26,17 @@
         </Border>
 
         <Label
-            FontSize="Small"
+            FontSize="Micro"
             HorizontalOptions="Center"
             HorizontalTextAlignment="Center"
-            Text="This tool helps you set your config for Counter-Strike" />
+            Text="A tool to set your config for Counter-Strike" />
 
-        <Label FontSize="Large" Text="How To Use:" />
+        <Label FontSize="Medium" Text="How To Use:" />
         <VerticalStackLayout Spacing="10">
-            <Label FontSize="Small" Text="- In 'Create Config', adjust the settings according to your preferences" />
-            <Label FontSize="Small" Text="    - Optional: Import an existing config file by pressing 'Import Config' in the top-right" />
+            <Label FontSize="Micro" Text="- In 'Create Config', adjust the settings according to your preferences" />
+            <Label FontSize="Micro" Text="    - Optional: Import an existing config file by pressing 'Import Config' in the top-right" />
 
-            <Label FontSize="Small" LineBreakMode="WordWrap">
+            <Label FontSize="Micro" LineBreakMode="WordWrap">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="- Set the save destination for your autoexec.cfg to your " />
@@ -46,14 +46,14 @@
                 </Label.FormattedText>
             </Label>
 
-            <Label FontSize="Small" Text="- Save your config by pressing 'Create'" />
-            <Label FontSize="Small" Text="- Either:" />
-            <Label FontSize="Small" Text="    - Add your config to your game's launch options:" />
-            <Label FontSize="Small" Text="        - Go to your library in the Steam app" />
-            <Label FontSize="Small" Text="        - Right-click Counter-Strike and click 'Properties...'" />
-            <Label FontSize="Small" Text="        - In 'General', add '+exec autoexec' to the 'Launch Properties' text field" />
-            <Label FontSize="Small" Text="        - Your config will be set every time the game starts" />
-            <Label FontSize="Small" Text="    - Or, open the console in-game (press ~ by default), and run the command 'exec autoexec'" />
+            <Label FontSize="Micro" Text="- Save your config by pressing 'Create'" />
+            <Label FontSize="Micro" Text="- Either:" />
+            <Label FontSize="Micro" Text="    - Add your config to your game's launch options:" />
+            <Label FontSize="Micro" Text="        - Go to your library in the Steam app" />
+            <Label FontSize="Micro" Text="        - Right-click Counter-Strike and click 'Properties...'" />
+            <Label FontSize="Micro" Text="        - In 'General', add '+exec autoexec' to the 'Launch Properties' text field" />
+            <Label FontSize="Micro" Text="        - Your config will now be set every time the game starts" />
+            <Label FontSize="Micro" Text="    - Or, open the console in-game (press ~ by default), and run the command 'exec autoexec'" />
 
         </VerticalStackLayout>
 

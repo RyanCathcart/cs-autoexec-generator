@@ -79,18 +79,18 @@ public partial class SliderSetting : ContentView
 
     void OnEntryCompleted(object sender, EventArgs e)
     {
-        var control = (Entry)sender;
+        var entry = (Entry)sender;
 
-        if (double.TryParse(control.Text, out double newValue) == false)
+        if (double.TryParse(entry.Text, out double newValue) == false)
         {
-            control.Text = Value.ToString("F");
+            entry.Text = Value.ToString("F");
             return;
         }
 
         if (newValue < Minimum) newValue = Minimum;
         else if (newValue > Maximum) newValue = Maximum;
 
-        control.Text = newValue.ToString("F");
+        entry.Text = newValue.ToString("F");
 
         Value = newValue;
     }
