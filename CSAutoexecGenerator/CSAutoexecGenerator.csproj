@@ -37,8 +37,8 @@
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		<MauiImage Include="Resources\Images\home.svg" TintColor="#3E8EED" />
+		<MauiImage Include="Resources\Images\create.svg" TintColor="#3E8EED" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -48,6 +48,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\create.svg" />
+	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Raw\default_config.json" />
 	</ItemGroup>
 

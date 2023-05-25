@@ -7,15 +7,29 @@
     Title="Counter-Strike Autoexec Generator"
     Shell.FlyoutBehavior="Locked">
 
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="10" ColumnDefinitions="50,*">
+                <Image MaximumHeightRequest="25" Source="{Binding FlyoutIcon}" />
+                <Label
+                    Grid.Column="1"
+                    Text="{Binding Title}"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:MainPage}"
+        Icon="home.png"
         Route="HomePage"
         Shell.NavBarIsVisible="False" />
 
     <ShellContent
         Title="Create Config"
         ContentTemplate="{DataTemplate views:CreateConfigPage}"
+        Icon="create.png"
         Route="CreateConfigPage"
         Shell.NavBarIsVisible="True" />
 
