@@ -47,8 +47,17 @@
                     TextColor="{x:StaticResource Blue100Accent}" />
             </DataTemplate>
 
+            <DataTemplate x:Key="IntValue" x:DataType="models:IntSetting">
+                <components:IntSliderSetting
+                    Title="{Binding Name}"
+                    Description="{Binding Description}"
+                    Maximum="{Binding Maximum}"
+                    Minimum="{Binding Minimum}"
+                    Value="{Binding Value, Mode=TwoWay}" />
+            </DataTemplate>
+
             <DataTemplate x:Key="DoubleValue" x:DataType="models:DoubleSetting">
-                <components:SliderSetting
+                <components:DoubleSliderSetting
                     Title="{Binding Name}"
                     Description="{Binding Description}"
                     Maximum="{Binding Maximum}"
@@ -66,7 +75,8 @@
             <components:SettingDataTemplateSelector
                 x:Key="SettingSelector"
                 BooleanValueTemplate="{StaticResource BooleanValue}"
-                DoubleValueTemplate="{StaticResource DoubleValue}" />
+                DoubleValueTemplate="{StaticResource DoubleValue}"
+                IntValueTemplate="{StaticResource IntValue}" />
 
         </ResourceDictionary>
     </ContentPage.Resources>

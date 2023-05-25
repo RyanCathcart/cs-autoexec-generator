@@ -60,7 +60,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Components\SliderSetting.xaml">
+	  <Compile Update="Components\DoubleSliderSetting.xaml.cs">
+	    <DependentUpon>DoubleSliderSetting.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Components\IntSliderSetting.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\DoubleSliderSetting.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\SwitchSetting.xaml">

@@ -9,6 +9,14 @@
         "Value": true
       },
       {
+        "$type": "int",
+        "Name": "fps_max",
+        "Description": "Sets the maximum frames per second that will be rendered by your client. Set to 0 to disable the FPS cap.",
+        "Minimum": 0,
+        "Maximum": 1000,
+        "Value": 300
+      },
+      {
         "$type": "boolean",
         "Name": "net_graph",
         "Description": "Enables or disables the net graph display, which shows ping, FPS, and other client variables.",

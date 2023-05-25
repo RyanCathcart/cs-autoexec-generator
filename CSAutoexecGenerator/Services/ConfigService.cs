@@ -44,7 +44,11 @@ public class ConfigService
                 var command = setting.Name;
                 string value;
 
-                if (setting is DoubleSetting doubleSetting)
+                if (setting is IntSetting intSetting)
+                {
+                    value = intSetting.Value.ToString();
+                }
+                else if (setting is DoubleSetting doubleSetting)
                 {
                     value = doubleSetting.Value.ToString();
                 }

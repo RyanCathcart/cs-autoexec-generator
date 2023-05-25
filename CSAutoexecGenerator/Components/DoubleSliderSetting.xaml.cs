@@ -2,16 +2,16 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace CSAutoexecGenerator.Components;
 
-public partial class SliderSetting : ContentView
+public partial class DoubleSliderSetting : ContentView
 {
-    public SliderSetting()
+    public DoubleSliderSetting()
     {
         InitializeComponent();
     }
 
     // Title Property and BindableProperty definitions
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(
-        nameof(Title), typeof(string), typeof(SliderSetting), "Default Title");
+        nameof(Title), typeof(string), typeof(DoubleSliderSetting), "Default Title");
 
 	public string Title 
 	{
@@ -22,7 +22,7 @@ public partial class SliderSetting : ContentView
 
     // Description Property and BindableProperty definitions
     public static readonly BindableProperty DescriptionProperty = BindableProperty.Create(
-        nameof(Description), typeof(string), typeof(SliderSetting), "Default description.");
+        nameof(Description), typeof(string), typeof(DoubleSliderSetting), "Default description.");
 
     public string Description
     {
@@ -33,7 +33,7 @@ public partial class SliderSetting : ContentView
 
     // Maximum Property and BindableProperty definitions
     public static readonly BindableProperty MaximumProperty = BindableProperty.Create(
-        nameof(Maximum), typeof(double), typeof(SliderSetting), 1.0);
+        nameof(Maximum), typeof(double), typeof(DoubleSliderSetting), 1.0);
 
 
     public double Maximum
@@ -45,7 +45,7 @@ public partial class SliderSetting : ContentView
 
     // Minimum Property and BindableProperty definitions
     public static readonly BindableProperty MinimumProperty = BindableProperty.Create(
-        nameof(Minimum), typeof(double), typeof(SliderSetting), 0.0);
+        nameof(Minimum), typeof(double), typeof(DoubleSliderSetting), 0.0);
 
     public double Minimum
     {
@@ -56,11 +56,11 @@ public partial class SliderSetting : ContentView
 
     // Value Property and BindableProperty definitions
     public static readonly BindableProperty ValueProperty = BindableProperty.Create(
-        nameof(Value), typeof(double), typeof(SliderSetting), propertyChanged: OnValueChanged);
+        nameof(Value), typeof(double), typeof(DoubleSliderSetting), propertyChanged: OnValueChanged);
 
     private static void OnValueChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        var control = (SliderSetting)bindable;
+        var control = (DoubleSliderSetting)bindable;
 
         double value = (double)newValue;
 

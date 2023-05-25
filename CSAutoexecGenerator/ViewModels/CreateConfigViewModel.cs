@@ -51,6 +51,8 @@ public partial class CreateConfigViewModel : ObservableObject
         {
             Settings.Add(settingGroup);
         }
+
+        Settings.Add(new SettingGroup("Other", new List<Setting>()));
     }
 
     [RelayCommand]
