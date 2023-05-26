@@ -4,14 +4,16 @@ namespace CSAutoexecGenerator.Components;
 
 public class SettingDataTemplateSelector : DataTemplateSelector
 {
-    public DataTemplate IntValueTemplate { get; set; }
-    public DataTemplate DoubleValueTemplate { get; set; }
-    public DataTemplate BooleanValueTemplate { get; set; }
+    public DataTemplate IntValue { get; set; }
+    public DataTemplate DoubleValue { get; set; }
+    public DataTemplate BooleanValue { get; set; }
+    public DataTemplate OtherSetting { get; set; }
 
     protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
     {
-        if (item is IntSetting) return IntValueTemplate;
-        if (item is DoubleSetting) return DoubleValueTemplate;
-        return BooleanValueTemplate;
+        if (item is IntSetting) return IntValue;
+        if (item is DoubleSetting) return DoubleValue;
+        if (item is BooleanSetting) return BooleanValue;
+        return OtherSetting;
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="CSAutoexecGenerator.Components.OtherSettingsEditor"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
+    <VerticalStackLayout
+        Padding="14,5"
+        BindingContext="{x:Reference this}"
+        Spacing="10">
+
+        <Label Text="Add to/modify this as you see fit, as it will be placed at the end of the generated config. When importing an existing config, settings not recognized by CS Autoexec Generator will appear here." TextColor="Gray" />
+
+        <ScrollView
+            HeightRequest="200"
+            HorizontalOptions="Start"
+            WidthRequest="475">
+            <Editor
+                AutoSize="TextChanges"
+                FontFamily="Consolas"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Text="{Binding Text}" />
+        </ScrollView>
+
+    </VerticalStackLayout>
+</ContentView>

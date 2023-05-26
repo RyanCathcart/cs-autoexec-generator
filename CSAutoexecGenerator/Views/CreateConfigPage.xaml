@@ -47,7 +47,7 @@
                     TextColor="{x:StaticResource Blue100Accent}" />
             </DataTemplate>
 
-            <DataTemplate x:Key="IntValue" x:DataType="models:IntSetting">
+            <DataTemplate x:Key="IntValueTemplate" x:DataType="models:IntSetting">
                 <components:IntSliderSetting
                     Title="{Binding Name}"
                     Description="{Binding Description}"
@@ -56,7 +56,7 @@
                     Value="{Binding Value, Mode=TwoWay}" />
             </DataTemplate>
 
-            <DataTemplate x:Key="DoubleValue" x:DataType="models:DoubleSetting">
+            <DataTemplate x:Key="DoubleValueTemplate" x:DataType="models:DoubleSetting">
                 <components:DoubleSliderSetting
                     Title="{Binding Name}"
                     Description="{Binding Description}"
@@ -65,18 +65,23 @@
                     Value="{Binding Value, Mode=TwoWay}" />
             </DataTemplate>
 
-            <DataTemplate x:Key="BooleanValue" x:DataType="models:BooleanSetting">
+            <DataTemplate x:Key="BooleanValueTemplate" x:DataType="models:BooleanSetting">
                 <components:SwitchSetting
                     Title="{Binding Name}"
                     Description="{Binding Description}"
                     Value="{Binding Value, Mode=TwoWay}" />
             </DataTemplate>
 
+            <DataTemplate x:Key="OtherSettingTemplate" x:DataType="models:OtherSettings">
+                <components:OtherSettingsEditor Text="{Binding Text, Mode=TwoWay}" />
+            </DataTemplate>
+
             <components:SettingDataTemplateSelector
                 x:Key="SettingSelector"
-                BooleanValueTemplate="{StaticResource BooleanValue}"
-                DoubleValueTemplate="{StaticResource DoubleValue}"
-                IntValueTemplate="{StaticResource IntValue}" />
+                BooleanValue="{StaticResource BooleanValueTemplate}"
+                DoubleValue="{StaticResource DoubleValueTemplate}"
+                IntValue="{StaticResource IntValueTemplate}"
+                OtherSetting="{StaticResource OtherSettingTemplate}" />
 
         </ResourceDictionary>
     </ContentPage.Resources>

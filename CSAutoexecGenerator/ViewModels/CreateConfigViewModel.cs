@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CSAutoexecGenerator.Components;
 using CSAutoexecGenerator.Models;
 using CSAutoexecGenerator.Services;
 using System.Collections.ObjectModel;
@@ -51,8 +52,6 @@ public partial class CreateConfigViewModel : ObservableObject
         {
             Settings.Add(settingGroup);
         }
-
-        Settings.Add(new SettingGroup("Other", new List<Setting>()));
     }
 
     [RelayCommand]

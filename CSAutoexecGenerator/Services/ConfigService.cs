@@ -1,4 +1,5 @@
 ﻿using CSAutoexecGenerator.Models;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace CSAutoexecGenerator.Services;
@@ -6,7 +7,7 @@ namespace CSAutoexecGenerator.Services;
 public class ConfigService
 {
     readonly List<SettingGroup> _settingList = new();
-    readonly List<string> _excludeList = new() { "//", "bind", "alias", "host_writeconfig", "echo" };
+    readonly List<string> _excludeList = new() { "//", "host_writeconfig", "echo" };
 
     public async Task<List<SettingGroup>> LoadDefaultConfigAsync()
     {
@@ -26,6 +27,8 @@ public class ConfigService
             }
         }
 
+        _settingList.Add(new SettingGroup("Other", new List<Setting> { new OtherSettings() }));
+
         return _settingList;
     }
 
@@ -41,21 +44,22 @@ public class ConfigService
 
             foreach (var setting in settingGroup)
             {
+                if (setting is OtherSettings otherSettings)
+                {
+                    await outputFile.WriteAsync(otherSettings.Text);
+
+                    continue;
+                }
+
                 var command = setting.Name;
                 string value;
 
-                if (setting is IntSetting intSetting)
-                {
+                if (setting is IntSetting intSetting) 
                     value = intSetting.Value.ToString();
-                }
-                else if (setting is DoubleSetting doubleSetting)
-                {
+                else if (setting is DoubleSetting doubleSetting) 
                     value = doubleSetting.Value.ToString();
-                }
-                else
-                {
+                else 
                     value = ((BooleanSetting)setting).Value ? "1" : "0";
-                }
 
                 await outputFile.WriteLineAsync($"{command} \"{value}\"");
             }
@@ -88,13 +92,19 @@ public class ConfigService
                 var settingName = props[0];
                 var settingValue = props[1].Trim('"');
 
+                bool included = false;
+
                 foreach (var settingGroup in settings)
                 {
                     foreach (var setting in settingGroup)
                     {
                         if (setting.Name == settingName)
                         {
-                            if (setting is DoubleSetting doubleSetting)
+                            if (setting is IntSetting intSetting)
+                            {
+                                intSetting.Value = int.Parse(settingValue);
+                            }
+                            else if (setting is DoubleSetting doubleSetting)
                             {
                                 doubleSetting.Value = double.Parse(settingValue);
                             }
@@ -102,9 +112,17 @@ public class ConfigService
                             {
                                 ((BooleanSetting)setting).Value = settingValue == "1";
                             }
+                            included = true;
                         }
                     }
                 }
+
+                if (!included) 
+                {
+                    var otherSettings = (OtherSettings)settings.FirstOrDefault(x => x.Name == "Other")[0];
+                    otherSettings.Text += $"{line}\n";
+                }
+                
             }
         }
 

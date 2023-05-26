@@ -72,6 +72,9 @@
 	  <MauiXaml Update="Components\DoubleSliderSetting.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\OtherSettingsEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\SwitchSetting.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
