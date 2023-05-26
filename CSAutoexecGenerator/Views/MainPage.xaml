@@ -4,58 +4,60 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Welcome to Counter-Strike Autoexec Generator">
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Border
-            Padding="10"
-            MaximumWidthRequest="500"
-            Stroke="Transparent"
-            StrokeShape="RoundRectangle 10">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Border
+                Padding="10"
+                MaximumWidthRequest="500"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 10">
 
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Offset="0.0" Color="{x:StaticResource Blue100Accent}" />
-                    <GradientStop Offset="1.0" Color="{x:StaticResource Tertiary}" />
-                </LinearGradientBrush>
-            </Border.Background>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0.0" Color="{x:StaticResource Blue100Accent}" />
+                        <GradientStop Offset="1.0" Color="{x:StaticResource Tertiary}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Label
+                    FontSize="48"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Counter-Strike Autoexec Generator" />
+            </Border>
 
             <Label
-                FontSize="48"
+                FontSize="Micro"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
-                Text="Counter-Strike Autoexec Generator" />
-        </Border>
+                Text="A tool to set your config for Counter-Strike" />
 
-        <Label
-            FontSize="Micro"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"
-            Text="A tool to set your config for Counter-Strike" />
+            <Label FontSize="Medium" Text="How To Use:" />
+            <VerticalStackLayout Spacing="10">
+                <Label FontSize="Micro" Text="- In 'Create Config', adjust the settings according to your preferences" />
+                <Label FontSize="Micro" Text="    - Optional: Import an existing config file by pressing 'Import Config' in the top-right" />
 
-        <Label FontSize="Medium" Text="How To Use:" />
-        <VerticalStackLayout Spacing="10">
-            <Label FontSize="Micro" Text="- In 'Create Config', adjust the settings according to your preferences" />
-            <Label FontSize="Micro" Text="    - Optional: Import an existing config file by pressing 'Import Config' in the top-right" />
+                <Label FontSize="Micro" LineBreakMode="WordWrap">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="- Set the save destination for your autoexec.cfg to your " />
+                            <Span FontAttributes="Italic" Text="Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg " />
+                            <Span Text="folder " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-            <Label FontSize="Micro" LineBreakMode="WordWrap">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="- Set the save destination for your autoexec.cfg to your " />
-                        <Span FontAttributes="Italic" Text="Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg " />
-                        <Span Text="folder " />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                <Label FontSize="Micro" Text="- Save your config by pressing 'Create'" />
+                <Label FontSize="Micro" Text="- Either:" />
+                <Label FontSize="Micro" Text="    - Add your config to your game's launch options:" />
+                <Label FontSize="Micro" Text="        - Go to your library in the Steam app" />
+                <Label FontSize="Micro" Text="        - Right-click Counter-Strike and click 'Properties...'" />
+                <Label FontSize="Micro" Text="        - In 'General', add '+exec autoexec' to the 'Launch Properties' text field" />
+                <Label FontSize="Micro" Text="        - Your config will now be set every time the game starts" />
+                <Label FontSize="Micro" Text="    - Or, open the console in-game (press ~ by default), and run the command 'exec autoexec'" />
 
-            <Label FontSize="Micro" Text="- Save your config by pressing 'Create'" />
-            <Label FontSize="Micro" Text="- Either:" />
-            <Label FontSize="Micro" Text="    - Add your config to your game's launch options:" />
-            <Label FontSize="Micro" Text="        - Go to your library in the Steam app" />
-            <Label FontSize="Micro" Text="        - Right-click Counter-Strike and click 'Properties...'" />
-            <Label FontSize="Micro" Text="        - In 'General', add '+exec autoexec' to the 'Launch Properties' text field" />
-            <Label FontSize="Micro" Text="        - Your config will now be set every time the game starts" />
-            <Label FontSize="Micro" Text="    - Or, open the console in-game (press ~ by default), and run the command 'exec autoexec'" />
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
-
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
